@@ -1,0 +1,61 @@
+.input {
+  padding: 50px;
+  font-size: 64px;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  color: var(--text-color);
+}
+
+.input::placeholder {
+  color: #b3b3b1;
+}
+
+.editor {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  gap: 20px;
+  height: 700px;
+  position: relative;
+}
+
+.btn,
+.addBtn {
+  width: 36px;
+  height: 36px;
+  border: 1px solid var(--text-color);
+  border-radius: 50%;
+  background-color: transparent;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.addBtn {
+  border-color: #1a8917;
+}
+
+.add {
+  display: flex;
+  gap: 20px;
+  position: absolute;
+  z-index: 999;
+  width: 100%;
+  left: 50px;
+  background-color: var(--bg-color);
+}
+.textArea {
+  width: 100%;
+}
+
+.publishBtn {
+  padding: 10px 20px;
+  width: max-content;
+  border: none;
+  border-radius: 20px;
+  background-color: #1a8917;
+  color: white;
+  cursor: pointer;
+}
