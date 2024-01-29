@@ -2,23 +2,27 @@
 import React, { useState } from 'react';
 import styles from './authLinks.module.css';
 import Link from 'next/link';
+import { signOut, useSession } from 'next-auth/react';
 
 export const AuthLinks = () => {
-  const status = 'authenticated';
+  const { status } = useSession();
   const [open, setOpen] = useState(false);
+
   return (
     <>
-      {status === 'notauthenticated' ? (
+      {status === 'unauthenticated' ? (
         <Link href={'/login'} className={styles.link}>
           Login
         </Link>
       ) : (
         <>
           {' '}
-          <Link className={styles.link} href={'/login'}>
+          <Link className={styles.link} href={'/write'}>
             Write
           </Link>
-          <span className={styles.link}>Logout</span>
+          <span className={styles.link} onClick={signOut}>
+            Logout
+          </span>
         </>
       )}
       <div className={styles.hamburger} onClick={() => setOpen(!open)}>
@@ -32,13 +36,15 @@ export const AuthLinks = () => {
           <Link href={'/'}>Home</Link>
           <Link href={'/'}>Contact</Link>
           <Link href={'/'}>About</Link>
-          {status === 'notauthenticated' ? (
+          {status === 'unauthenticated' ? (
             <Link href={'/login'}>Login</Link>
           ) : (
             <>
               {' '}
               <Link href={'/write'}>Write</Link>
-              <span className={styles.link}>Logout</span>
+              <span className={styles.link} onClick={signOut}>
+                Logout
+              </span>
             </>
           )}
         </div>

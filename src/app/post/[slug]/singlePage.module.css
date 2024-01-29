@@ -13,7 +13,7 @@
 }
 
 .img {
-  object-fit: cover;
+  object-fit: contain;
 }
 
 .textContainer {
@@ -67,6 +67,12 @@
   font-size: 20px;
   font-weight: 300;
   margin-bottom: 20px;
+}
+
+.views {
+  font-size: 18px;
+  color: var(--soft-textColor);
+  margin-top: 10px;
 }
 
 @media screen and (max-width: 1536px) {

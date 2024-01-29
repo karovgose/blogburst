@@ -1,10 +1,14 @@
 .input {
-  padding: 50px;
+  padding: 20px;
   font-size: 64px;
   border: none;
+  border-radius: 8px;
   outline: none;
+  width: 100%;
   background-color: transparent;
   color: var(--text-color);
+
+  margin-bottom: 20px;
 }
 
 .input::placeholder {
@@ -24,7 +28,7 @@
 .addBtn {
   width: 36px;
   height: 36px;
-  border: 1px solid var(--text-color);
+  border: 1px solid #b3b3b1;
   border-radius: 50%;
   background-color: transparent;
   display: flex;
@@ -46,10 +50,20 @@
   left: 50px;
   background-color: var(--bg-color);
 }
-.textArea {
-  width: 100%;
+.customTextArea {
+  padding: 20px;
+  font-size: 20px;
+  border: 1px solid #b3b3b1;
+  border-radius: 8px;
+  color: #b3b3b1;
+  background-color: var(--bg-color);
+  resize: vertical;
+  height: 200px;
 }
 
+.customTextArea::placeholder {
+  color: var(--text-color);
+}
 .publishBtn {
   padding: 10px 20px;
   width: max-content;
@@ -57,5 +71,18 @@
   border-radius: 20px;
   background-color: #1a8917;
   color: white;
+  cursor: pointer;
+}
+
+.select {
+  margin-bottom: 20px;
+  padding: 12px;
+  width: 100%;
+  border: 1px solid #b3b3b1;
+  border-radius: 8px;
+  background-color: var(--bg-color);
+  color: #b3b3b1;
+  font-size: 16px;
+  outline: none;
   cursor: pointer;
 }
