@@ -4,8 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const getData = async () => {
-  const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${apiUrl}/api/categories`, {
+  const res = await fetch(`blogburst.vercel.app/api/categories`, {
     cache: 'no-store',
   });
 
