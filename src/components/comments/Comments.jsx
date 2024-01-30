@@ -28,7 +28,8 @@ const Comments = ({ postSlug }) => {
   const [desc, setDesc] = useState('');
 
   const handleSubmit = async () => {
-    await fetch('/api/comments', {
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    await fetch(`${apiUrl}/api/comments`, {
       method: 'POST',
       body: JSON.stringify({ desc, postSlug }),
     });
