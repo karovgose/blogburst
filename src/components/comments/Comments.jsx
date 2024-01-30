@@ -22,7 +22,7 @@ const Comments = ({ postSlug }) => {
   const { status } = useSession();
 
   const { data, isLoading } = useSWR(
-    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
+    `/api/comments?postSlug=${postSlug}`,
     fetchData
   );
   const [desc, setDesc] = useState('');
