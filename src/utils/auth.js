@@ -1,11 +1,13 @@
+import { PrismaAdapter } from '@auth/prisma-adapter';
+import { getServerSession } from 'next-auth';
+import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 import GithubProvider from 'next-auth/providers/github';
 import FacebookProvider from 'next-auth/providers/facebook';
-import { PrismaAdapter } from '@auth/prisma-adapter';
-
 import prisma from './connect';
-import { getServerSession } from 'next-auth';
+
 export const authOptions = {
+  secret: process.env.NEXTAUTH_SECRET, // Add this line with your own secret
   adapter: PrismaAdapter(prisma),
   providers: [
     GoogleProvider({
@@ -18,5 +20,9 @@ export const authOptions = {
     }),
   ],
 };
+
+const handler = NextAuth(authOptions);
+
+export { handler as GET, handler as POST };
 
 export const getAuthSession = () => getServerSession(authOptions);

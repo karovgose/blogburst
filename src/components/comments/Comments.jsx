@@ -21,13 +21,13 @@ const fetchData = async (url) => {
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
   const { data, isLoading } = useSWR(
-    `/api/comments?postSlug=${postSlug}`,
+    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
     fetchData
   );
   const [desc, setDesc] = useState('');
 
   const handleSubmit = async () => {
-    await fetch('http://localhost:3000/api/comments', {
+    await fetch('/api/comments', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json',

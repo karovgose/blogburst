@@ -3,24 +3,15 @@ import styles from './singlePage.module.css';
 import Image from 'next/image';
 import Comments from '@/components/comments/Comments';
 const getData = async (slug) => {
-  const apiUrl = `http://localhost:3000/api/posts/${slug}?popular=true`;
-  console.log('API URL:', apiUrl);
+  const res = await fetch(`http://localhost:3000/api/posts/${slug}`, {
+    cache: 'no-store',
+  });
 
-  try {
-    const res = await fetch(apiUrl, {
-      cache: 'no-store',
-    });
-
-    if (!res.ok) {
-      console.error('Failed to fetch data:', res.statusText);
-      throw new Error('Failed');
-    }
-
-    return res.json();
-  } catch (error) {
-    console.error('Error during data fetching:', error);
-    throw error;
+  if (!res.ok) {
+    throw new Error('Failed');
   }
+
+  return res.json();
 };
 
 const SinglePage = async ({ params }) => {

@@ -23,7 +23,9 @@ export const Navbar = () => {
         />
         <Image src={'/youtube.png'} alt="youtube-icon" width={24} height={24} />
       </div>
-      <div className={styles.logo}>BlogBurst</div>
+      <Link href={'/'} className={styles.logo}>
+        BlogBurst
+      </Link>
       <div className={styles.links}>
         <ThemeToggle />
         <Link className={styles.link} href={'/'}>
