@@ -20,10 +20,9 @@ const fetchData = async (url) => {
 
 const Comments = ({ postSlug }) => {
   const { status } = useSession();
-  const apiBaseUrl =
-    process.env.NEXT_PUBLIC_API_BASE_URL || 'http://localhost:3000';
+
   const { data, isLoading } = useSWR(
-    `${apiBaseUrl}/api/comments?postSlug=${postSlug}`,
+    `http://localhost:3000/api/comments?postSlug=${postSlug}`,
     fetchData
   );
   const [desc, setDesc] = useState('');
@@ -31,13 +30,9 @@ const Comments = ({ postSlug }) => {
   const handleSubmit = async () => {
     await fetch('/api/comments', {
       method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify({ desc: desc, postSlug: postSlug }),
+      body: JSON.stringify({ desc, postSlug }),
     });
     mutate();
-    setDesc('');
   };
 
   return (

@@ -120,18 +120,6 @@ export const WritePage = () => {
             <button className={styles.addBtn} onClick={handleImageButtonClick}>
               <Image src={'/image.png'} alt="image" width={16} height={16} />
             </button>
-
-            <button className={styles.addBtn}>
-              <Image
-                src={'/external.png'}
-                alt="external"
-                width={16}
-                height={16}
-              />
-            </button>
-            <button className={styles.addBtn}>
-              <Image src={'/video.png'} alt="video" width={16} height={16} />
-            </button>
           </div>
         )}
         <textarea
