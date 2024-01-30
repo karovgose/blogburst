@@ -4,9 +4,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 
 const getData = async () => {
-  const res = await fetch(
-    'https://blogburst-karovgose.vercel.app/api/categories'
-  );
+  const res = await fetch('/api/categories');
   if (!res.ok) {
     throw new Error('Failed');
   }
