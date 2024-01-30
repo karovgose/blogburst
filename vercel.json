@@ -1,0 +1,11 @@
+{
+  "version": 2,
+  "builds": [
+    { "src": "package.json", "use": "@vercel/node" },
+    { "src": ".next/**", "use": "@vercel/node" },
+    { "src": "public/**", "use": "@vercel/node" },
+    { "src": "api/**/*", "use": "@vercel/node" },
+    { "src": "prisma/**/*", "use": "@vercel/node" }
+  ],
+  "routes": [{ "src": "/(.*)", "dest": "/" }]
+}
