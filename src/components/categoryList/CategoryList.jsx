@@ -5,9 +5,7 @@ import Image from 'next/image';
 
 const getData = async () => {
   const apiUrl = process.env.NEXT_PUBLIC_API_URL;
-  const res = await fetch(`${apiUrl}/api/categories`, {
-    cache: 'no-store',
-  });
+  const res = await fetch(`${apiUrl}/api/categories`);
 
   if (!res.ok) {
     throw new Error('Failed');
