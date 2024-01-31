@@ -3,22 +3,24 @@ import styles from './singlePage.module.css';
 import Image from 'next/image';
 import Comments from '@/components/comments/Comments';
 
-export const getServerSideProps = async (context) => {
-  const { slug } = context.params;
-  const res = await fetch(`/api/posts/${slug}`);
+const getData = async (slug) => {
+  const res = await fetch(`/api/posts/${slug}`, {
+    cache: 'no-store',
+  });
+
   if (!res.ok) {
     throw new Error('Failed');
   }
-  const data = await res.json();
 
-  return {
-    props: {
-      data,
-    },
-  };
+  return res.json();
 };
 
-const SinglePage = ({ data }) => {
+const SinglePage = async ({ params }) => {
+  const { slug } = params;
+
+  const data = await getData(slug);
+
+  console.log(data);
   return (
     <div className={styles.container}>
       <div className={styles.infoContainer}>
@@ -66,7 +68,7 @@ const SinglePage = ({ data }) => {
           </div>
           <div className={styles.comment}>
             {' '}
-            <Comments postSlug={data.post.slug} />
+            <Comments postSlug={slug} />
           </div>
         </div>
         <Menu />
