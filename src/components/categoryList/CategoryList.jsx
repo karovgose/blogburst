@@ -3,17 +3,21 @@ import styles from './categoryList.module.css';
 import Link from 'next/link';
 import Image from 'next/image';
 
-const getData = async () => {
+export const getServerSideProps = async () => {
   const res = await fetch('/api/categories');
   if (!res.ok) {
     throw new Error('Failed');
   }
-  return res.json();
+  const data = await res.json();
+
+  return {
+    props: {
+      data,
+    },
+  };
 };
 
-export const CategoryList = async () => {
-  const data = await getData();
-
+const CategoryList = ({ data }) => {
   return (
     <div className={styles.container}>
       <h1 className={styles.title}>Popular Categories</h1>
