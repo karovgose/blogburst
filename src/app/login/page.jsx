@@ -8,9 +8,26 @@ import toast, { Toaster } from 'react-hot-toast';
 import styles from './login.module.css';
 
 export const Login = () => {
-  const { data, status } = useSession();
+  const { status } = useSession();
   const router = useRouter();
-  const [loading, setLoading] = useState(false);
+
+  const handleSignIn = async (provider) => {
+    let loadingToastId;
+
+    try {
+      loadingToastId = toast.loading('Signing in ....');
+
+      await signIn(provider);
+
+      toast.dismiss(loadingToastId);
+
+      // Show success toast after loading toast is dismissed
+      toast.success('Successfully signed in!');
+    } catch (error) {
+      console.error(error);
+      toast.error('Failed to sign in. Please try again.');
+    }
+  };
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -18,21 +35,10 @@ export const Login = () => {
     }
   }, [status, router]);
 
-  const handleSignIn = async (provider) => {
-    try {
-      setLoading(true);
-      await signIn(provider);
-      setLoading(false);
-    } catch (error) {
-      setLoading(false);
-      // Display error toas
-      toast.error('Failed to sign in. Please try again.');
-    }
-  };
-
   return (
     <div className={styles.container}>
-      <Toaster />
+      <Toaster position="top-right" reverseOrder={false} />
+
       <div className={styles.wrapper}>
         <div
           className={styles.socialButton}
@@ -41,7 +47,7 @@ export const Login = () => {
           Sign in with Google
         </div>
       </div>
-      {loading && (
+      {status === 'loading' && (
         <div className={styles.spinner}>
           <ThreeDots
             visible={true}

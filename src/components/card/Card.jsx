@@ -23,7 +23,7 @@ export const Card = ({ item }) => {
           <h1 className={styles.title}> {item.title}</h1>
         </Link>
 
-        <p className={styles.desc}>{item.desc}</p>
+        <p className={styles.desc}>{item.desc.slice(0, 350)}</p>
         <Link className={styles.link} href={`/post/${item.slug}`}>
           Read More
         </Link>
