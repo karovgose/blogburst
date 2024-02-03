@@ -2,3 +2,40 @@
   display: flex;
   gap: 50px;
 }
+.contactContainer,
+.aboutContainer {
+  margin-top: 50px;
+}
+.contactTitle,
+.aboutTitle {
+  font-size: 64px;
+  text-transform: capitalize;
+  font-weight: 700;
+  margin-bottom: 20px;
+}
+
+.contactContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--soft-textColor);
+}
+
+@media screen and (max-width: 768px) {
+  .contactTitle {
+    font-size: 36px;
+  }
+}
+
+.aboutContent {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  color: var(--soft-textColor);
+}
+
+@media screen and (max-width: 768px) {
+  .aboutTitle {
+    font-size: 36px;
+  }
+}

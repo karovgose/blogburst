@@ -18,14 +18,30 @@ export const Footer = () => {
           beginning; let your curiosity lead the way. Happy reading!.
         </p>
         <div className={styles.icons}>
-          <Image src={'/facebook.png'} alt="facebook" width={18} height={18} />
-          <Image
-            src={'/instagram.png'}
-            alt="instagram"
-            width={18}
-            height={18}
-          />
-          <Image src={'/youtube.png'} alt="youtube" width={18} height={18} />
+          <Link href={'https://www.facebook.com/'} target="blank">
+            <Image
+              src={'/facebook.png'}
+              alt="facebook-icon"
+              width={24}
+              height={24}
+            />
+          </Link>
+          <Link href={'https://www.instagram.com/'} target="blank">
+            <Image
+              src={'/instagram.png'}
+              alt="instagram-icon"
+              width={24}
+              height={24}
+            />
+          </Link>
+          <Link href={'https://www.youtube.com/'} target="blank">
+            <Image
+              src={'/youtube.png'}
+              alt="youtube-icon"
+              width={24}
+              height={24}
+            />
+          </Link>
         </div>
       </div>
       <div className={styles.links}>
@@ -49,9 +65,15 @@ export const Footer = () => {
         <div className={styles.list}>
           {' '}
           <span className={styles.listTitle}>Social</span>
-          <Link href={'/'}>Facebook</Link>
-          <Link href={'/'}>Instagram</Link>
-          <Link href={'/'}>Youtube</Link>
+          <Link href={'https://www.facebook.com/'} target="_blank">
+            Facebook
+          </Link>
+          <Link href={'https://www.instagram.com/'} target="_blank">
+            Instagram
+          </Link>
+          <Link href={'https://www.youtube.com/'} target="_blank">
+            Youtube
+          </Link>
         </div>
       </div>
     </div>

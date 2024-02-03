@@ -9,7 +9,6 @@ export const AuthLinks = () => {
   const [open, setOpen] = useState(false);
 
   const handleLinkClick = () => {
-    // Close the menu when a link is clicked
     setOpen(false);
   };
 
@@ -49,10 +48,10 @@ export const AuthLinks = () => {
           <Link href={'/'} onClick={handleLinkClick}>
             Home
           </Link>
-          <Link href={'/'} onClick={handleLinkClick}>
+          <Link href={'#contact'} onClick={handleLinkClick}>
             Contact
           </Link>
-          <Link href={'/'} onClick={handleLinkClick}>
+          <Link href={'#about'} onClick={handleLinkClick}>
             About
           </Link>
           {status === 'unauthenticated' ? (

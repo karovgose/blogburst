@@ -9,19 +9,30 @@ export const Navbar = () => {
   return (
     <div className={styles.container}>
       <div className={styles.social}>
-        <Image
-          src={'/facebook.png'}
-          alt="facebook-icon"
-          width={24}
-          height={24}
-        />
-        <Image
-          src={'/instagram.png'}
-          alt="instagram-icon"
-          width={24}
-          height={24}
-        />
-        <Image src={'/youtube.png'} alt="youtube-icon" width={24} height={24} />
+        <Link href={'https://www.facebook.com/'} target="blank">
+          <Image
+            src={'/facebook.png'}
+            alt="facebook-icon"
+            width={24}
+            height={24}
+          />
+        </Link>
+        <Link href={'https://www.instagram.com/'} target="blank">
+          <Image
+            src={'/instagram.png'}
+            alt="instagram-icon"
+            width={24}
+            height={24}
+          />
+        </Link>
+        <Link href={'https://www.youtube.com/'} target="blank">
+          <Image
+            src={'/youtube.png'}
+            alt="youtube-icon"
+            width={24}
+            height={24}
+          />
+        </Link>
       </div>
       <Link href={'/'} className={styles.logo}>
         BlogBurst
@@ -31,10 +42,10 @@ export const Navbar = () => {
         <Link className={styles.link} href={'/'}>
           Home
         </Link>
-        <Link className={styles.link} href={'/'}>
+        <Link className={styles.link} href={'#contact'}>
           Contact
         </Link>
-        <Link className={styles.link} href={'/'}>
+        <Link className={styles.link} href={'#about'}>
           About
         </Link>
         <AuthLinks />
