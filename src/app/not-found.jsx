@@ -7,7 +7,7 @@ export default function NotFound() {
         Page Not Found
       </h2>
       <p style={{ color: 'var(--soft-textColor)' }}>
-        Oops! It seems like the page you're looking for doesn't exist.
+        Oops! It seems like the page you&apos;re looking for doesn&apos;t exist.
       </p>
       <Link href="/">
         <span
