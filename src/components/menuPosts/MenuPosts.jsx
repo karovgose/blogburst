@@ -35,7 +35,7 @@ export const MenuPosts = ({ withImage }) => {
         />
       )}
       {posts.map((post) => (
-        <Link href={`/#`} key={post.id} className={styles.item}>
+        <Link href={`/post/${post.slug}`} key={post.id} className={styles.item}>
           {withImage && (
             <div className={styles.imgContainer}>
               <Image
