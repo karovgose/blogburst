@@ -2,9 +2,14 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  flex-direction: column;
   margin-top: 60px;
 }
-
+.spinner {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
 .wraper {
   background-color: var(--soft-bg);
   padding: 150px 200px;

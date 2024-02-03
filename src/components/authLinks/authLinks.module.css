@@ -18,6 +18,7 @@
 
 .responsiveMenu {
   position: absolute;
+  z-index: 999;
   top: 100px;
   left: 0;
   background-color: var(--bg-color);

@@ -1,97 +1,67 @@
-import React from 'react';
+'use client';
+import React, { useEffect, useState } from 'react';
 import styles from './menuPosts.module.css';
 import Image from 'next/image';
 import Link from 'next/link';
+import { ThreeDots } from 'react-loader-spinner';
 
 export const MenuPosts = ({ withImage }) => {
+  const [posts, setPosts] = useState([]);
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    setLoading(true);
+    fetch('/api/posts/top-posts')
+      .then((response) => response.json())
+      .then((data) => {
+        setPosts(data.topViewedPosts || []);
+        setLoading(false);
+      })
+      .catch((error) => console.error('Error fetching posts:', error));
+  }, []);
+
   return (
     <div className={styles.items}>
-      {' '}
-      <Link href={'#'} className={styles.item}>
-        {withImage && (
-          <div className={styles.imgContainer}>
-            <Image
-              src={'/mountain.jpg'}
-              fill
-              alt="mountain"
-              className={styles.img}
-            />
-          </div>
-        )}
+      {loading && (
+        <ThreeDots
+          visible={true}
+          height="30"
+          width="30"
+          color="#626262"
+          radius="9"
+          ariaLabel="three-dots-loading"
+          wrapperStyle={{}}
+          wrapperClass=""
+        />
+      )}
+      {posts.map((post) => (
+        <Link href={`/#`} key={post.id} className={styles.item}>
+          {withImage && (
+            <div className={styles.imgContainer}>
+              <Image
+                src={post.img}
+                fill
+                alt={post.title}
+                className={styles.img}
+              />
+            </div>
+          )}
 
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.travel} `}>Travel</span>
-          <h3 className={styles.postTitle}>Lorem ipsum dolor sit amet</h3>
-          <div className={styles.detail}>
-            <span className={styles.userName}>John Doe</span>
-            <span className={styles.date}> - 10.01.2024</span>
+          <div className={styles.textContainer}>
+            <span className={`${styles.category} ${styles[post.category]}`}>
+              {post.category}
+            </span>
+            <h3 className={styles.postTitle}>{post.title}</h3>
+            <div className={styles.detail}>
+              <span className={styles.userName}>{post.user.name}</span>
+              <span className={styles.date}>
+                {' '}
+                - {post.createdAt.slice(0, 10)}
+              </span>
+            </div>
           </div>
-        </div>
-      </Link>
-      <Link href={'#'} className={styles.item}>
-        {withImage && (
-          <div className={styles.imgContainer}>
-            <Image
-              src={'/mountain.jpg'}
-              fill
-              alt="mountain"
-              className={styles.img}
-            />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.workout} `}>
-            Workout
-          </span>
-          <h3 className={styles.postTitle}>Lorem ipsum dolor sit amet</h3>
-          <div className={styles.detail}>
-            <span className={styles.userName}>John Doe</span>
-            <span className={styles.date}> - 10.01.2024</span>
-          </div>
-        </div>
-      </Link>
-      <Link href={'#'} className={styles.item}>
-        {withImage && (
-          <div className={styles.imgContainer}>
-            <Image
-              src={'/mountain.jpg'}
-              fill
-              alt="mountain"
-              className={styles.img}
-            />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.fashion} `}>
-            Fashion
-          </span>
-          <h3 className={styles.postTitle}>Lorem ipsum dolor sit amet</h3>
-          <div className={styles.detail}>
-            <span className={styles.userName}>John Doe</span>
-            <span className={styles.date}> - 10.01.2024</span>
-          </div>
-        </div>
-      </Link>
-      <Link href={'#'} className={styles.item}>
-        {withImage && (
-          <div className={styles.imgContainer}>
-            <Image
-              src={'/mountain.jpg'}
-              fill
-              alt="mountain"
-              className={styles.img}
-            />
-          </div>
-        )}
-        <div className={styles.textContainer}>
-          <span className={`${styles.category} ${styles.food} `}>Food</span>
-          <h3 className={styles.postTitle}>Lorem ipsum dolor sit amet</h3>
-          <div className={styles.detail}>
-            <span className={styles.userName}>John Doe</span>
-            <span className={styles.date}> - 10.01.2024</span>
-          </div>
-        </div>
-      </Link>
+        </Link>
+      ))}
     </div>
   );
 };

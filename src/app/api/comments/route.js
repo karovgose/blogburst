@@ -36,10 +36,55 @@ export const POST = async (req) => {
     const comment = await prisma.comment.create({
       data: { ...body, userEmail: session.user.email },
     });
-
+    console.log(req.body);
     return new NextResponse(JSON.stringify({ comment }, { status: 200 }));
   } catch (error) {
     console.log(error);
+    return new NextResponse(
+      JSON.stringify({ message: 'Something went wrong!' }, { status: 500 })
+    );
+  }
+};
+
+export const DELETE = async (req) => {
+  const { id } = await req.json();
+
+  try {
+    await prisma.comment.delete({ where: { id } });
+    return new NextResponse(
+      JSON.stringify(
+        { message: 'Comment deleted successfully' },
+        { status: 200 }
+      )
+    );
+  } catch (error) {
+    return new NextResponse(
+      JSON.stringify({ message: 'Something went wrong!' }, { status: 500 })
+    );
+  }
+};
+
+export const PUT = async (req) => {
+  try {
+    const { id, desc } = await req.json();
+
+    if (!id) {
+      throw new Error('Comment ID is missing');
+    }
+
+    const updatedComment = await prisma.comment.update({
+      where: { id },
+      data: { desc },
+    });
+
+    console.log('Comment updated successfully:', updatedComment);
+
+    return new NextResponse(
+      JSON.stringify({ comment: updatedComment }, { status: 200 })
+    );
+  } catch (error) {
+    console.error('Error updating comment:', error);
+
     return new NextResponse(
       JSON.stringify({ message: 'Something went wrong!' }, { status: 500 })
     );

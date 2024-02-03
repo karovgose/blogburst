@@ -6,6 +6,7 @@
 .btn {
   width: 100px;
   border: none;
+  border-radius: 8px;
   padding: 16px;
   background-color: crimson;
   color: white;

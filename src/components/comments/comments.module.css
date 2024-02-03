@@ -25,6 +25,27 @@
   padding: 20px;
 }
 
+.editCancel {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.updateBtn,
+.cancelBtn {
+  padding: 8px 15px;
+  background-color: #0ea5e9;
+  color: var(--textColor);
+  border: none;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.cancelBtn {
+  background-color: #f43f5e;
+}
+
 .btn {
   padding: 16px 20px;
   background-color: teal;
@@ -65,4 +86,32 @@
 .desc {
   font-size: 18px;
   font-weight: 300;
+}
+
+.editDelete {
+  margin-top: 20px;
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.editBtn,
+.deleteBtn {
+  background-color: rgb(14 165 233);
+  color: var(--textColor);
+  border: none;
+  padding: 8px 15px;
+  cursor: pointer;
+  border-radius: 5px;
+  font-size: 14px;
+}
+
+.deleteBtn {
+  background-color: #f43f5e;
+}
+
+.loading {
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }

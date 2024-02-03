@@ -1,13 +1,16 @@
 'use client';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { signIn, useSession } from 'next-auth/react';
-import styles from './login.module.css';
 import { useRouter } from 'next/navigation';
+import { ThreeDots } from 'react-loader-spinner';
+import toast, { Toaster } from 'react-hot-toast';
+
+import styles from './login.module.css';
 
 export const Login = () => {
   const { data, status } = useSession();
-  console.log(data, status);
   const router = useRouter();
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     if (status === 'authenticated') {
@@ -15,20 +18,43 @@ export const Login = () => {
     }
   }, [status, router]);
 
+  const handleSignIn = async (provider) => {
+    try {
+      setLoading(true);
+      await signIn(provider);
+      setLoading(false);
+    } catch (error) {
+      setLoading(false);
+      // Display error toas
+      toast.error('Failed to sign in. Please try again.');
+    }
+  };
+
   return (
     <div className={styles.container}>
-      <div className={styles.wraper}>
+      <Toaster />
+      <div className={styles.wrapper}>
         <div
           className={styles.socialButton}
-          onClick={() => {
-            signIn('google');
-          }}
+          onClick={() => handleSignIn('google')}
         >
           Sign in with Google
         </div>
-        <div className={styles.socialButton}>Sign in with Github</div>
-        <div className={styles.socialButton}>Sign in with Facebook</div>
       </div>
+      {loading && (
+        <div className={styles.spinner}>
+          <ThreeDots
+            visible={true}
+            height="50"
+            width="50"
+            color="#626262"
+            radius="9"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
     </div>
   );
 };

@@ -74,6 +74,11 @@
   cursor: pointer;
 }
 
+.publishBtn:disabled {
+  cursor: not-allowed;
+  background-color: gray;
+}
+
 .select {
   margin-bottom: 20px;
   padding: 12px;

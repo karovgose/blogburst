@@ -8,11 +8,13 @@ export const GET = async (req) => {
   const cat = searchParams.get('cat');
 
   const POST_PER_PAGE = 2;
+  const calculatedSkip = Math.max(0, POST_PER_PAGE * (page - 1));
   const query = {
     take: POST_PER_PAGE,
-    skip: POST_PER_PAGE * (page - 1),
+    skip: calculatedSkip,
     where: { ...(cat && { catSlug: cat }) },
   };
+
   try {
     const [posts, count] = await prisma.$transaction([
       prisma.post.findMany(query),

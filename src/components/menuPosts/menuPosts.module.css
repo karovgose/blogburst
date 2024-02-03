@@ -64,3 +64,8 @@
 .date {
   color: gray;
 }
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

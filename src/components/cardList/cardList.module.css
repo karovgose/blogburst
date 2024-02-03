@@ -5,3 +5,8 @@
 .title {
   margin: 50px 0;
 }
+.spinner {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

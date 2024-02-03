@@ -1,8 +1,11 @@
 'use client';
 import Image from 'next/image';
 import styles from './write.module.css';
+import { ThreeDots } from 'react-loader-spinner';
 import { useState, useEffect, useRef } from 'react';
 import { useSession } from 'next-auth/react';
+import { toast } from 'react-hot-toast';
+import CustomToaster from '@/components/Toaster';
 import { useRouter } from 'next/navigation';
 import {
   getStorage,
@@ -16,6 +19,7 @@ const storage = getStorage(app);
 
 export const WritePage = () => {
   const [open, setOpen] = useState(false);
+  const [loading, setLoading] = useState(false);
   const [value, setValue] = useState('');
   const [file, setFile] = useState(null);
   const [media, setMedia] = useState('');
@@ -38,7 +42,7 @@ export const WritePage = () => {
       if (!file) return;
 
       const name = new Date().getTime() + file.name;
-      console.log('Generated name:', name);
+
       const storageRef = ref(storage, name);
 
       const uploadTask = uploadBytesResumable(storageRef, file);
@@ -47,8 +51,10 @@ export const WritePage = () => {
         await uploadTask;
         const downloadURL = await getDownloadURL(uploadTask.snapshot.ref);
         setMedia(downloadURL);
+        toast.success('Image uploaded successfully!');
       } catch (error) {
         console.error('Error during upload:', error);
+        toast.error('Error uploading image.😢');
       }
     };
 
@@ -71,31 +77,63 @@ export const WritePage = () => {
   };
 
   const handleSubmit = async () => {
-    const res = await fetch('/api/posts', {
-      method: 'POST',
-      body: JSON.stringify({
-        title,
-        desc: value,
-        img: media,
-        slug: slugify(title),
-        catSlug: catSlug || 'style',
-      }),
-    });
-    console.log(await res.json());
+    setLoading(true);
+    try {
+      const res = await fetch('/api/posts', {
+        method: 'POST',
+        body: JSON.stringify({
+          title,
+          desc: value,
+          img: media,
+          slug: slugify(title),
+          catSlug: catSlug || 'style',
+        }),
+      });
+      const data = await res.json();
+      setLoading(false);
+      if (data.error) {
+        toast.error('Error uploading post. Please try again.');
+      } else {
+        toast.success('Post uploaded successfully!');
+
+        router.push(`/`);
+      }
+      return data;
+    } catch (error) {
+      console.error('Error writing data:', error);
+      toast.error('Error uploading post. Please try again.');
+    }
   };
 
   return (
     <div className={styles.container}>
+      <CustomToaster />
+      {loading && (
+        <div className={styles.spinner}>
+          <ThreeDots
+            visible={true}
+            height="50"
+            width="50"
+            color="#626262"
+            radius="9"
+            ariaLabel="three-dots-loading"
+            wrapperStyle={{}}
+            wrapperClass=""
+          />
+        </div>
+      )}
       <input
         type="text"
         placeholder="Title"
         className={styles.input}
         value={title}
         onChange={(e) => setTitle(e.target.value)}
+        disabled={loading}
       />
       <select
         className={styles.select}
         onChange={(e) => setCatSlug(e.target.value)}
+        disabled={loading}
       >
         <option value="style">style</option>
         <option value="fashion">fashion</option>
@@ -128,7 +166,11 @@ export const WritePage = () => {
           value={value}
           onChange={(e) => setValue(e.target.value)}
         />
-        <button className={styles.publishBtn} onClick={handleSubmit}>
+        <button
+          className={styles.publishBtn}
+          onClick={handleSubmit}
+          disabled={loading}
+        >
           Publish
         </button>
       </div>
