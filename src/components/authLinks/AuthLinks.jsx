@@ -63,15 +63,15 @@ export const AuthLinks = () => {
               <Link href={'/write'} onClick={handleLinkClick}>
                 Write
               </Link>
-              <span
-                className={styles.link}
+              <Link
+                href={'/login'}
                 onClick={() => {
                   signOut();
                   handleLinkClick();
                 }}
               >
                 Logout
-              </span>
+              </Link>
             </>
           )}
         </div>
